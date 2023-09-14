@@ -1,0 +1,48 @@
+
+abstract  class Container {
+    private double length;
+    private double height;
+    private double width;
+    private long MaxWeight;
+
+
+
+        //getters
+
+    public double getLength() {
+        return length;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+
+    public long getMaxWeight() {
+        return MaxWeight;
+    }
+    //setters
+
+    public void setLength(double length) {
+            this.length = length;
+        }
+
+    public void setHeight(double height) {
+            this.height = height;
+        }
+
+    public void setWidth(double width) {
+            this.width = width;
+        }
+
+    public void setMaxWeight(long maxWeight) {
+        MaxWeight = maxWeight;
+    }
+
+    public abstract double volume();
+
+}
