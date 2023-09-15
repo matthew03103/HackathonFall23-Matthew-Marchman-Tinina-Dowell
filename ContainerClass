@@ -1,48 +1,62 @@
 
-abstract  class Container {
-    private double length;
-    private double height;
-    private double width;
-    private long MaxWeight;
+public abstract  class Container {
+    //a length/depth attribute
+    private int length;
+    //a width attribute
+    private int width;
+    //a height attribute
+    private int height;
+    // a weight attribute
+    private long weight;
 
+    //constructor
+    Container(){}
 
-
-        //getters
-
-    public double getLength() {
+    // getters & setters
+    //length
+    public int getLength() {
         return length;
     }
 
-    public double getHeight() {
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    //width
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    //height
+    public int getHeight() {
         return height;
     }
 
-    public double getWidth() {
-        return width;
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    //weight
+    public long getWeight() {
+        return weight;
+    }
+
+    public void setWeight(long weight) {
+        this.weight = weight;
+    }
+
+    //method
+    public int containerArea(){
+        return getLength() * getWidth();
     }
 
 
-    public long getMaxWeight() {
-        return MaxWeight;
-    }
-    //setters
 
-    public void setLength(double length) {
-            this.length = length;
-        }
 
-    public void setHeight(double height) {
-            this.height = height;
-        }
 
-    public void setWidth(double width) {
-            this.width = width;
-        }
 
-    public void setMaxWeight(long maxWeight) {
-        MaxWeight = maxWeight;
-    }
-
-    public abstract double volume();
 
 }
