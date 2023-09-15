@@ -1,45 +1,12 @@
 public class BoxTruck extends Container{
+    public BoxTruck() {
 
-
-    BoxTruck() {
-        double length = 24;
-        double height = 8;
-        double width = 8;
-        long maxWeight = 26000;
-        setLength(length);
-        setHeight(height);
-        setWidth(width);
-        setMaxWeight(maxWeight);
+        super.setLength(24);
+        super.setWidth(8);
+        super.setHeight(8);
+        super.setWeight(26000);
 
     }
-     @Override
-    public void setLength(double length) {
-        super.setLength(length);
-    }
-
-    @Override
-    public void setHeight(double height) {
-        super.setHeight(height);
-    }
-
-    @Override
-    public void setWidth(double width) {
-        super.setWidth(width);
-    }
-
-    @Override
-    public void setMaxWeight(long maxWeight) {
-        super.setMaxWeight(maxWeight);
-    }
-
-
-    @Override
-    public double volume() {
-        return getLength() * getHeight() * getWidth();
-    }
-
-
-
 
 
 }
