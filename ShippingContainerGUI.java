@@ -3,102 +3,82 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ShippingContainerGUI extends JFrame {
+public class ShippingContainerGUI extends JPanel {
+    private static final int BOX_SIZE = 50;
+    private static final int CONTAINER_WIDTH = 400;
+    private static final int CONTAINER_HEIGHT = 400;
 
-    public static String[][][] container = new String[40][8][8];
-    public static Box box = new Box(1, 5, 2, 5);
+    private String[][][] container = new String[40][8][8];
+    private int counter = 0;
 
     public ShippingContainerGUI() {
-        setTitle("Shipping Container");
-        setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(CONTAINER_WIDTH, CONTAINER_HEIGHT));
 
-        JPanel containerPanel = new JPanel(new GridLayout(40, 8, 1, 1));
-
-        fillArray(container, box);
-
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 8; j++) {
-                for (int k = 0; k < 8; k++) {
-                    if (container[i][j][k] != null) {
-                        JLabel boxLabel = new JLabel(container[i][j][k]);
-                        boxLabel.setHorizontalAlignment(JLabel.CENTER);
-                        containerPanel.add(boxLabel);
-                    }
-                }
-            }
-        }
-
-        JScrollPane scrollPane = new JScrollPane(containerPanel);
-        add(scrollPane);
-
-        JButton resetButton = new JButton("Reset");
-        resetButton.addActionListener(new ActionListener() {
+        // Add a button to add a box to the container
+        JButton addButton = new JButton("Add Box");
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetContainer();
-                refreshContainer(containerPanel);
+                addBoxToContainer();
+                repaint(); // Redraw the container with the new box
             }
         });
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(resetButton);
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        setVisible(true);
+        // Add the button to the GUI
+        add(addButton);
     }
 
-    public static void fillArray(String[][][] container, Box box) {
-        int counter = 0;
-        long maxWeight = 59200;
-        long temp = box.getWeight();
+    private void addBoxToContainer() {
+        if (counter < 40 * 8 * 8) {
+            int i = counter / (8 * 8);
+            int j = (counter / 8) % 8;
+            int k = counter % 8;
 
-        if (maxWeight > temp) {
-            for (int i = 0; i < 40 / box.getLength(); i++) {
-                for (int j = 0; j < 8 / box.getHeight(); j++) {
-                    for (int k = 0; k < 8 / box.getWidth(); k++) {
-                        counter++;
-                        container[i][j][k] = "box " + counter + " ";
-                    }
-                }
-            }
+            container[i][j][k] = "box " + (counter + 1);
+            counter++;
+        } else {
+            JOptionPane.showMessageDialog(this, "Container is full!");
         }
     }
 
-    public static void resetContainer() {
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 8; j++) {
-                for (int k = 0; k < 8; k++) {
-                    container[i][j][k] = null;
-                }
-            }
-        }
-    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-    public static void refreshContainer(JPanel containerPanel) {
-        containerPanel.removeAll();
-        fillArray(container, box);
+        int x = 0;
+        int y = 0;
 
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 8; j++) {
                 for (int k = 0; k < 8; k++) {
-                    if (container[i][j][k] != null) {
-                        JLabel boxLabel = new JLabel(container[i][j][k]);
-                        boxLabel.setHorizontalAlignment(JLabel.CENTER);
-                        containerPanel.add(boxLabel);
+                    String boxLabel = container[i][j][k];
+                    if (boxLabel != null) {
+                        g.setColor(Color.BLUE);
+                        g.fillRect(x, y, BOX_SIZE, BOX_SIZE);
+                        g.setColor(Color.BLACK);
+                        g.drawRect(x, y, BOX_SIZE, BOX_SIZE);
+                        g.drawString(boxLabel, x + 5, y + 20);
                     }
+                    x += BOX_SIZE;
                 }
+                x = 0;
+                y += BOX_SIZE;
             }
+            y = 0;
         }
-
-        containerPanel.revalidate();
-        containerPanel.repaint();
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new ShippingContainerGUI();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new JFrame("Shipping Container");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.add(new ShippingContainerGUI());
+                frame.pack();
+                frame.setVisible(true);
+            }
         });
     }
 }
+
 
