@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+//BOX SIZES ARE BIGGER IN THE GUI TO SHOW EXAMPLE
+
+public class BoxGUI extends JPanel {
+    private int length;
+    private int width;
+    private int height;
+    private long weight;
+
+    public BoxGUI() {
+        setLayout(new FlowLayout());
+
+        JLabel lengthLabel = new JLabel("Length:");
+        JTextField lengthField = new JTextField(5);
+        JLabel widthLabel = new JLabel("Width:");
+        JTextField widthField = new JTextField(5);
+        JLabel heightLabel = new JLabel("Height:");
+        JTextField heightField = new JTextField(5);
+        JButton drawButton = new JButton("enter ");
+
+        drawButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    length = Integer.parseInt(lengthField.getText());
+                    width = Integer.parseInt(widthField.getText());
+                    height = Integer.parseInt(heightField.getText());
+                    repaint(); // Redraw the box with new dimensions
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid dimensions (numeric values).");
+                }
+            }
+        });
+
+        add(lengthLabel);
+        add(lengthField);
+        add(widthLabel);
+        add(widthField);
+        add(heightLabel);
+        add(heightField);
+        add(drawButton);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Draw the box outline
+        g.drawRect(50, 50, length, width);
+
+        // Fill the box with a color (you can change the color)
+        g.setColor(Color.BLUE);
+        g.fillRect(50, 50, length, width);
+
+        // Draw the height of the box
+        g.setColor(Color.BLACK);
+        g.drawLine(50, 50, 50, 50 + height);
+        g.drawLine(50 + length, 50, 50 + length, 50 + height);
+        g.drawLine(50, 50 + height, 50 + length, 50 + height);
+
+
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Box ");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(new BoxGUI());
+            frame.setSize(400, 300);
+            frame.setVisible(true);
+        });
+    }
+}
