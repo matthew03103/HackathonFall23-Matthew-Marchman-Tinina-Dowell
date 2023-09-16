@@ -4,15 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ShippingContainerGUI extends JPanel {
-    private static final int BOX_SIZE = 50;
-    private static final int CONTAINER_WIDTH = 400;
-    private static final int CONTAINER_HEIGHT = 400;
+    private static int boxSize = 50;
+    private static int ContainerWidth = 400;
+    private static int ContainerHeight = 400;
 
     private String[][][] container = new String[40][8][8];
     private int counter = 0;
 
     public ShippingContainerGUI() {
-        setPreferredSize(new Dimension(CONTAINER_WIDTH, CONTAINER_HEIGHT));
+        setPreferredSize(new Dimension(ContainerWidth, ContainerHeight));
 
         // Add a button to add a box to the container
         JButton addButton = new JButton("Add Box");
@@ -54,15 +54,15 @@ public class ShippingContainerGUI extends JPanel {
                     String boxLabel = container[i][j][k];
                     if (boxLabel != null) {
                         g.setColor(Color.BLUE);
-                        g.fillRect(x, y, BOX_SIZE, BOX_SIZE);
+                        g.fillRect(x, y, boxSize, boxSize);
                         g.setColor(Color.BLACK);
-                        g.drawRect(x, y, BOX_SIZE, BOX_SIZE);
+                        g.drawRect(x, y, boxSize, boxSize);
                         g.drawString(boxLabel, x + 5, y + 20);
                     }
-                    x += BOX_SIZE;
+                    x += boxSize;
                 }
                 x = 0;
-                y += BOX_SIZE;
+                y += boxSize;
             }
             y = 0;
         }
@@ -80,5 +80,4 @@ public class ShippingContainerGUI extends JPanel {
         });
     }
 }
-
 
