@@ -4,9 +4,9 @@ GPC hackathon for team G7
 -This was a project built by Matthew Marchman, and Tinina Dowell for a Hackathon put on by Kennesaw 
 State University. 
 
--The sponcer for our challange Was Genuine Parts Company (Genuine Parts Company)
+-The sponsor for our challange Was Genuine Parts Company (GPC)
 
--The challange was to create an algorithm that puts boxes into a shipping container, and a pallet, and a box truck in the most optimul way possible.
+-The challange was to create an algorithm that puts boxes into a shipping container, and a pallet, and a box truck in the most optimal way possible.
 
 -Our team started with the most simple senerio which was loading boxes that were the same size into the shipping container.
 
